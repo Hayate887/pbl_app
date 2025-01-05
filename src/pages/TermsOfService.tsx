@@ -54,7 +54,7 @@ export default function ServiceRule() {
                                 <Text>なお、保存期間終了から画像が削除されるまでの間に、保存された画像がユーザーの同意無しに使用されることはありません</Text>
                             </ListItem>
                             <ListItem mt="2">
-                                <Text>本アプリケーションは<Link href="https://github.com/Hayate887/pbl_app/blob/main/LICENSE" isExternal>MITライセンス</Link>を使用しています</Text>
+                                <Text>本アプリケーションは<Link color='blue' href="https://github.com/Hayate887/pbl_app/blob/main/LICENSE" isExternal>MITライセンス</Link>を使用しています</Text>
                             </ListItem>
                         </UnorderedList>
                         <FormControl mt={4}>
