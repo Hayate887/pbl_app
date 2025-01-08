@@ -4,6 +4,9 @@ import os
 import models
 from dotenv import load_dotenv
 import models
+from PIL import Image
+import io
+from fastapi.responses import StreamingResponse
 
 load_dotenv()
 
@@ -28,3 +31,11 @@ def add_image(email: str, data: bytes, session: Session):
     session.refresh(user_obj)
 
     return
+
+def get_images(id: int, session: Session):
+    user_obj = session.query(models.Image).filter_by(id=id).first()
+
+    if user_obj:
+        return StreamingResponse(io.BytesIO(user_obj.data), media_type="image/png")
+        
+    return {f"Image with ID {id} not found."}

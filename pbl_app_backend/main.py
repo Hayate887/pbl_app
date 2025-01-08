@@ -4,14 +4,14 @@ import io
 import os
 import cv2
 import numpy as np
-from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, Form
+from fastapi import Depends, FastAPI, File, HTTPException, UploadFile, Form, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from PIL import Image
 from sqlalchemy.orm import Session
 
 import models
-from database import add_image, get_db
+from database import add_image, get_images, get_db
 from retinaface import RetinaFace
 
 from typing import Union
@@ -195,6 +195,7 @@ def create_anaglyph_image_2(
 @app.post("/gray/anaglyph")
 async def file(
     file: UploadFile = File(...),
+    user_email: str=Form(...),
     session: Session = Depends(get_db),
 ):
    
@@ -228,3 +229,8 @@ async def file(
     add_image(user_email, image_bytes,session)
 
     return StreamingResponse(img_byte_arr, media_type="image/png")
+
+
+@app.get("/get/{id}/image")
+def get_image(id: int, session: Session = Depends(get_db),):
+    return get_images(id, session)
