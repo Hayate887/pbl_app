@@ -146,7 +146,7 @@ export default function App() {
 
             <VStack spacing={4} align="stretch" p={4}>
               <Button onClick={handleUpload} colorScheme="blue" mb={4} isLoading={isLoading}>
-                生成
+                作成
               </Button>
             </VStack>
 
