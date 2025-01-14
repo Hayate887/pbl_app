@@ -78,7 +78,7 @@ export default function App() {
       </Head>
 
       <Flex justify="center" align="center" minH={{ base: "90vh", md: "95vh" }} bgGradient="linear(to-r, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">
-        <Box p={50}>
+        <Box p={30}>
           <Stack spacing={5} align="center" p={5}>
             <Card title={cards[currentCard].title} content={cards[currentCard].content} imageUrl={cards[currentCard].imageUrl} />
             <Flex>

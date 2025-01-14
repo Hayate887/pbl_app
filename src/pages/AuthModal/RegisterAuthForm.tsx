@@ -14,7 +14,6 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
-import ServiceRule from "../Terms/TermsOfService";
 
 export interface AuthFormProps {
     onClose: () => void;
@@ -55,13 +54,13 @@ export default function AuthForm({ onClose }: AuthFormProps) {
             onClose();
             return;
         }
+
         onClose();
         router.push("/auth");
     }
 
     return (
         <>
-            <ServiceRule />
             <FormControl isInvalid={!!username && username.length < 1}>
                 <FormLabel>ユーザー名</FormLabel>
                 <Input
@@ -108,12 +107,11 @@ export default function AuthForm({ onClose }: AuthFormProps) {
                 colorScheme="blue"
                 onClick={handleSignUp}
                 isDisabled={
-                    !username ||
                     !email ||
                     !password ||
-                    username.length < 1 ||
                     !emailRegex.test(email) ||
                     password.length < 8
+
                 }
                 isLoading={loading}
             >
