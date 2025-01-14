@@ -17,13 +17,8 @@ from retinaface import RetinaFace
 from typing import Union
 from uuid import UUID
 
-import jwt
-from dotenv import load_dotenv
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
-
 
 app = FastAPI()
-load_dotenv()
 
 app.add_middleware(
     CORSMiddleware,
@@ -33,22 +28,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-
-async def get_auth_user_id(
-    authorization: HTTPAuthorizationCredentials = Depends(HTTPBearer()),
-):
-    token = authorization.credentials
-    payload = jwt.decode(
-        token,
-        SECRET_KEY,
-        audience="authenticated",
-        algorithms=["HS256"],
-        )
-    
-    return payload.get("sub")
-   
 
 """アナグリフ画像生成"""
 
@@ -232,5 +211,5 @@ async def file(
 
 
 @app.get("/get/{id}/image")
-def get_image(id: int, session: Session = Depends(get_db),):
+def get_image(id: int, session: Session = Depends(get_db)):
     return get_images(id, session)
