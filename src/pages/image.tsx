@@ -17,8 +17,10 @@ import {
 import { Session } from "@supabase/supabase-js";
 import axios from 'axios';
 import { useAtom } from "jotai";
+import Head from "next/head";
 import { ChangeEvent, useState } from "react";
-import Settings from './settings';
+import Footer from "./Footer/footer";
+import Settings from './Settings/settings';
 
 export default function App() {
   const [session] = useAtom<Session | null>(sessionState);
@@ -117,74 +119,82 @@ export default function App() {
   };
 
   return (
-    <Box bg='white' overflowY="auto" bgGradient="linear(to-r, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">
-      <Box bg='white'>
-        <Flex justifyContent='flex-end'>
-          <Settings />
-        </Flex>
-      </Box>
+    <>
+      <Head>
+        <title>画像作成</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
 
-      <Container>
-        <Flex justify="center" align="center" minH="100vh">
-          <Box p={50} borderWidth="1px" borderRadius='lg' overflowY="auto" bg="white">
-            <Center>
-              <VStack spacing={4} align="stretch" p={1}>
-                <FormControl>
-                  <FormLabel>
-                    画像
-                  </FormLabel>
-                  <Input type="file" onChange={handleFileChange} mb={4} />
+      <Box bg='white' overflowY="auto" bgGradient="linear(to-r, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">
+        <Box bg='white'>
+          <Flex justifyContent='flex-end'>
+            <Settings />
+          </Flex>
+        </Box>
 
-                  <FormLabel>種類</FormLabel>
-                  <Select value={selectedMode} onChange={(e) => onModeChange(e.target.value)} mb={4}>
-                    <option value='color'>カラー（赤青）</option>
-                    <option value='gray'>グレー（赤青）</option>
-                  </Select>
-                </FormControl>
+        <Container>
+          <Flex justify="center" align="center" minH={{ base: "90vh", md: "95vh" }} >
+            <Box p={50} borderWidth="1px" borderRadius='lg' overflowY="auto" bg="white">
+              <Center>
+                <VStack spacing={4} align="stretch" p={1}>
+                  <FormControl>
+                    <FormLabel>
+                      画像
+                    </FormLabel>
+                    <Input type="file" onChange={handleFileChange} mb={4} />
+
+                    <FormLabel>種類</FormLabel>
+                    <Select value={selectedMode} onChange={(e) => onModeChange(e.target.value)} mb={4}>
+                      <option value='color'>カラー（赤青）</option>
+                      <option value='gray'>グレー（赤青）</option>
+                    </Select>
+                  </FormControl>
+                </VStack>
+              </Center>
+
+              <VStack spacing={4} align="stretch" p={4}>
+                <Button onClick={handleUpload} colorScheme="blue" mb={4} isLoading={isLoading}>
+                  作成
+                </Button>
               </VStack>
-            </Center>
 
-            <VStack spacing={4} align="stretch" p={4}>
-              <Button onClick={handleUpload} colorScheme="blue" mb={4} isLoading={isLoading}>
-                作成
-              </Button>
-            </VStack>
+              {error && <Text color='red'>{error}</Text>}
+              {message && <Text mb={4}>{message}</Text>}
+              {imageSrc &&
+                <>
+                  <Center>
+                    <Image boxSize="500px" src={imageSrc} width='auto' alt="アナグリフ画像" mb={4} />
+                  </Center>
 
-            {error && <Text color='red'>{error}</Text>}
-            {message && <Text mb={4}>{message}</Text>}
-            {imageSrc &&
-              <>
-                <Center>
-                  <Image boxSize="500px" src={imageSrc} width='auto' alt="アナグリフ画像" mb={4} />
-                </Center>
-
-                <FormControl>
-                  <FormLabel aria-label="filename">ファイル名</FormLabel>
-                  <Input
-                    id="filename"
-                    type="text"
-                    value={filenameInput}
-                    onChange={(e) => setFilenameInput(e.target.value)}
-                    placeholder="sample"
-                    mb={4}
-                  />
-                </FormControl>
-                <Box display="flex" justifyContent="flex-end">
-                  <HStack spacing={4} align="stretch">
-                    <Button
-                      onClick={handleSaveImages}
-                      isDisabled={!filenameInput}
-                      isLoading={isLoading}
-                    >
-                      保存
-                    </Button>
-                    <Button onClick={handleAllDelete}>削除</Button>
-                  </HStack>
-                </Box>
-              </>}
-          </Box>
-        </Flex>
-      </Container>
-    </Box>
+                  <FormControl>
+                    <FormLabel aria-label="filename">ファイル名</FormLabel>
+                    <Input
+                      id="filename"
+                      type="text"
+                      value={filenameInput}
+                      onChange={(e) => setFilenameInput(e.target.value)}
+                      placeholder="sample"
+                      mb={4}
+                    />
+                  </FormControl>
+                  <Box display="flex" justifyContent="flex-end">
+                    <HStack spacing={4} align="stretch">
+                      <Button
+                        onClick={handleSaveImages}
+                        isDisabled={!filenameInput}
+                        isLoading={isLoading}
+                      >
+                        保存
+                      </Button>
+                      <Button onClick={handleAllDelete}>削除</Button>
+                    </HStack>
+                  </Box>
+                </>}
+            </Box>
+          </Flex>
+        </Container>
+      </Box>
+      <Footer />
+    </>
   );
 }

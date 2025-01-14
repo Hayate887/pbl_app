@@ -6,9 +6,9 @@ import {
     UnorderedList,
     useDisclosure
 } from "@chakra-ui/react";
-import LogOutButton from './Buttons/LogOutButton';
-import MethodButton from './Buttons/MethodButton';
-import TermsOfUse from './TermsOfUse';
+import LogOutButton from '../Buttons/LogOutButton';
+import MethodButton from '../Buttons/MethodButton';
+import TermsOfUse from '../Terms/TermsOfUse';
 
 export default function SettingButton() {
     const { isOpen, onOpen, onClose } = useDisclosure();

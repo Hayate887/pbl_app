@@ -14,7 +14,7 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
-import ServiceRule from "../TermsOfService";
+import ServiceRule from "../Terms/TermsOfService";
 
 export interface AuthFormProps {
     onClose: () => void;

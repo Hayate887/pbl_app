@@ -8,6 +8,7 @@ import {
 import Head from 'next/head';
 import { useRouter } from "next/router";
 import { useState } from 'react';
+import Footer from "./Footer/footer";
 
 interface CardProps {
   title: string;
@@ -76,7 +77,7 @@ export default function App() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Flex justify="center" align="center" minH="100vh" bgGradient="linear(to-r, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">
+      <Flex justify="center" align="center" minH={{ base: "90vh", md: "95vh" }} bgGradient="linear(to-r, rgba(255,0,0,0.1), rgba(0,0,255,0.1))">
         <Box p={50}>
           <Stack spacing={5} align="center" p={5}>
             <Card title={cards[currentCard].title} content={cards[currentCard].content} imageUrl={cards[currentCard].imageUrl} />
@@ -107,6 +108,7 @@ export default function App() {
           </Stack>
         </Box>
       </Flex>
+      <Footer />
     </>
   );
 }
