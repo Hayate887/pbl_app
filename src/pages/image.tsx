@@ -48,6 +48,7 @@ export default function App() {
 
   const handleAllDelete = () => {
     setImageSrc(null)
+    setFilenameInput("")
     setMessage("")
   };
 

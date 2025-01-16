@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import ServiceRule from "../Terms/TermsOfService";
 
 export interface AuthFormProps {
     onClose: () => void;
@@ -61,6 +62,7 @@ export default function AuthForm({ onClose }: AuthFormProps) {
 
     return (
         <>
+            <ServiceRule />
             <FormControl isInvalid={!!username && username.length < 1}>
                 <FormLabel>ユーザー名</FormLabel>
                 <Input
