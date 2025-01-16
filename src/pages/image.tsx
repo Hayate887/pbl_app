@@ -18,6 +18,7 @@ import { Session } from "@supabase/supabase-js";
 import axios from 'axios';
 import { useAtom } from "jotai";
 import Head from "next/head";
+import { useRouter } from 'next/router';
 import { ChangeEvent, useState } from "react";
 import Footer from "./Footer/footer";
 import Settings from './Settings/settings';
@@ -34,8 +35,12 @@ export default function App() {
   const [selectedMode, onModeChange] = useState('color');
   const [isLoading, setIsLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setError("");
+    setMessage("");
+
     if (e.target && e.target.files) {
       const selectedFile = e.target.files[0]
       if (selectedFile) {
@@ -44,12 +49,6 @@ export default function App() {
         setError("有効な画像ファイルを選択してください");
       }
     };
-  };
-
-  const handleAllDelete = () => {
-    setImageSrc(null)
-    setFilenameInput("")
-    setMessage("")
   };
 
   const handleSaveImages = () => {
@@ -68,7 +67,7 @@ export default function App() {
     setFilenameInput("")
     setImageSrc(null)
     setMessage("")
-    setError("");
+    setError("")
 
     if (!file) {
       setError("画像が選択されていません");
@@ -188,7 +187,7 @@ export default function App() {
                       >
                         保存
                       </Button>
-                      <Button onClick={handleAllDelete}>削除</Button>
+                      <Button onClick={() => router.reload()}>削除</Button>
                     </HStack>
                   </Box>
                 </>}
