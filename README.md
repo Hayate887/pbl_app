@@ -42,4 +42,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/b
 
 ## LICENSE 
 
-This project is licensed under the MIT License - see LICENSE for more details.
+This project is licensed under the MIT License - see [LICENSE](https://github.com/Hayate887/pbl_app/blob/main/LICENSE) for more details.
