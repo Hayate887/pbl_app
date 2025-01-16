@@ -65,6 +65,7 @@ export default function App() {
 
 
   const handleUpload = async () => {
+    setFilenameInput("")
     setImageSrc(null)
     setMessage("")
     setError("");
