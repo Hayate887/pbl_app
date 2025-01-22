@@ -6,6 +6,7 @@ import {
     UnorderedList,
     useDisclosure
 } from "@chakra-ui/react";
+import AuthButton from '../Buttons/AuthButton';
 import LogOutButton from '../Buttons/LogOutButton';
 import MethodButton from '../Buttons/MethodButton';
 import TermsOfUse from '../Terms/TermsOfUse';
@@ -15,7 +16,7 @@ export default function SettingButton() {
 
     return (
         <>
-            <Button position="absolute" top='3' left="3" onClick={onOpen}>
+            <Button size={{ base: "sm", md: "md" }} position="absolute" top='3' left="3" onClick={onOpen}>
                 <SettingsIcon />
             </Button>
 
@@ -27,6 +28,9 @@ export default function SettingButton() {
                     <DrawerBody>
                         <UnorderedList>
                             <ListItem>
+                                <AuthButton />
+                            </ListItem>
+                            <ListItem mt="4">
                                 <MethodButton />
                             </ListItem>
                             <ListItem mt="4">

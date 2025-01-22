@@ -8,7 +8,6 @@ export default function CrateImageButton() {
   return (
     <>
       <Button
-
         colorScheme="black"
         variant='link'
         onClick={() => router.push("/image")}
