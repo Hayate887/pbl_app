@@ -1,4 +1,3 @@
-import uuid
 from sqlalchemy import UUID, Column, Integer, LargeBinary, String
 from sqlalchemy.orm import DeclarativeBase
 

@@ -24,6 +24,7 @@ def get_db():
     finally:
         session.close()
 
+# 画像保存
 def add_image(email: str, data: bytes, session: Session):
     user_obj = models.Image(email=email, data=data)
     session.add(user_obj)
@@ -32,6 +33,7 @@ def add_image(email: str, data: bytes, session: Session):
 
     return
 
+# 画像表示
 def get_images(id: int, session: Session):
     user_obj = session.query(models.Image).filter_by(id=id).first()
 
